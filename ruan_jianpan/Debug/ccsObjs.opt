@@ -1,0 +1,1 @@
+"./LCD1602.obj" "./keyget.obj" "./main.obj" "../lnk_msp430f169.cmd" -llibc.a 
