@@ -14,11 +14,13 @@ void i2c_write(unsigned char naddr,unsigned char data)
     I2CTCTL |=I2CSTT +I2CSTP + I2CTRX;
     while((I2CIFG &TXRDYIFG)==0);//等待发送准备好
     I2CDRB =naddr;   //发送地址
-    delay_ms(9);
+
     while((I2CIFG &TXRDYIFG)==0);
-    I2CDRB =data;   // 发送命令
     delay_ms(9);
+    I2CDRB =data;   // 发送命令
+
     while((I2CTCTL &I2CSTP)==0x02);//等待停止信号
+    delay_ms(9);
 }
 unsigned char  i2c_read(unsigned char naddr){
     I2CNDAT =0x01;

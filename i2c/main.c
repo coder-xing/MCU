@@ -16,17 +16,20 @@ void Clock_Init()
 void port_init(){
     P3SEL |= 0x0A;
     U0CTL |=I2C +SYNC; //选择I2c模式
-    UCTL0 &=~I2CEN;//复位
+    U0CTL &=~I2CEN;//复位
     I2CTCTL =I2CSSEL1; //SMCLk时钟
-    I2CSA =0xd0;
-    U0CTL |=I2CEN;
+    I2CSA =0xd0;       //从机地址
+    U0CTL |=I2CEN;      //i2c使能
+    I2CIE = RXRDYIE;
     P6DIR =0xff;
     P6OUT =0x00;
+    P3DIR |=BIT1+BIT3;
 }
 /*
  * main.c
  */
 void main(void)
+
 {   uchar xx,yy;
 	WDTCTL = WDTPW | WDTHOLD;	  // stop watchdog timer
 	port_init();
