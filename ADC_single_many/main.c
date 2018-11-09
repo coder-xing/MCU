@@ -16,7 +16,7 @@ int main(void)
 	ADC12MCTL0 =INCH_0 +SREF_1;
 	ADC12IE |=BIT0;
 	ADC12CTL0 |=ENC +ADC12SC;
-	_BIS_SR(LPM3_bits+GIE);
+	_EINT();
 	return 0;
 }
 

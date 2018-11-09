@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v18.1.2                     
 ******************************************************************************
->> Linked Sun Oct 21 09:16:47 2018
+>> Linked Tue Nov  6 19:05:11 2018
 
 OUTPUT FILE NAME:   <hongwai.out>
 ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0000126c
@@ -17,7 +17,7 @@ MEMORY CONFIGURATION
   RAM                   00000200   00000800  00000057  000007a9  RWIX
   INFOB                 00001000   00000080  00000000  00000080  RWIX
   INFOA                 00001080   00000080  00000000  00000080  RWIX
-  FLASH                 00001100   0000eee0  000001f8  0000ece8  RWIX
+  FLASH                 00001100   0000eee0  000001fe  0000ece2  RWIX
   INT00                 0000ffe0   00000002  00000002  00000000  RWIX
   INT01                 0000ffe2   00000002  00000002  00000000  RWIX
   INT02                 0000ffe4   00000002  00000002  00000000  RWIX
@@ -49,24 +49,24 @@ section   page    origin      length       input sections
                   000009b0    00000002     rts430_eabi.lib : boot.c.obj (.stack)
                   000009b2    0000004e     --HOLE--
 
-.text      0    00001100    000001ee     
+.text      0    00001100    000001f4     
                   00001100    000000fc     main.obj (.text:port1_hongwai)
                   000011fc    00000042     rts430_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
                   0000123e    0000002e     main.obj (.text:Clock_Init)
                   0000126c    0000001c     rts430_eabi.lib : boot.c.obj (.text:_c_int00_noargs)
-                  00001288    00000018     main.obj (.text:port1_init)
-                  000012a0    00000016     main.obj (.text:main)
-                  000012b6    00000014     rts430_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
-                  000012ca    00000010                     : epilog.asm.obj (.text)
-                  000012da    00000008                     : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
-                  000012e2    00000006                     : exit.c.obj (.text:abort)
-                  000012e8    00000004                     : pre_init.c.obj (.text:_system_pre_init)
-                  000012ec    00000002                     : startup.c.obj (.text:_system_post_cinit)
+                  00001288    0000001c     main.obj (.text:main)
+                  000012a4    00000018     main.obj (.text:port1_init)
+                  000012bc    00000014     rts430_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
+                  000012d0    00000010                     : epilog.asm.obj (.text)
+                  000012e0    00000008                     : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
+                  000012e8    00000006                     : exit.c.obj (.text:abort)
+                  000012ee    00000004                     : pre_init.c.obj (.text:_system_pre_init)
+                  000012f2    00000002                     : startup.c.obj (.text:_system_post_cinit)
 
-.cinit     0    000012ee    0000000a     
-                  000012ee    00000004     (.cinit..bss.load) [load image, compression = zero_init]
-                  000012f2    00000002     (__TI_handler_table)
-                  000012f4    00000004     (__TI_cinit_table)
+.cinit     0    000012f4    0000000a     
+                  000012f4    00000004     (.cinit..bss.load) [load image, compression = zero_init]
+                  000012f8    00000002     (__TI_handler_table)
+                  000012fa    00000004     (__TI_cinit_table)
 
 .binit     0    00001100    00000000     
 
@@ -127,9 +127,9 @@ MODULE SUMMARY
        Module                 code   ro data   rw data
        ------                 ----   -------   -------
     .\
-       main.obj               344    2         7      
+       main.obj               350    2         7      
     +--+----------------------+------+---------+---------+
-       Total:                 344    2         7      
+       Total:                 350    2         7      
                                                       
     C:\ti\ccsv8\tools\compiler\ti-cgt-msp430_18.1.2.LTS\lib\rts430_eabi.lib
        autoinit.c.obj         66     0         0      
@@ -160,18 +160,18 @@ MODULE SUMMARY
        Stack:                 0      0         80     
        Linker Generated:      0      10        0      
     +--+----------------------+------+---------+---------+
-       Grand Total:           494    42        87     
+       Grand Total:           500    42        87     
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 000012f4 records: 1, size/record: 4, table size: 4
-	.bss: load addr=000012ee, load size=00000004 bytes, run addr=00000200, run size=00000007 bytes, compression=zero_init
+__TI_cinit_table @ 000012fa records: 1, size/record: 4, table size: 4
+	.bss: load addr=000012f4, load size=00000004 bytes, run addr=00000200, run size=00000007 bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 000012f2 records: 1, size/record: 2, table size: 2
+__TI_handler_table @ 000012f8 records: 1, size/record: 2, table size: 2
 	index: 0, handler: __TI_zero_init
 
 
@@ -218,7 +218,7 @@ address   name
 00000152  ADC12MEM9                     
 00000057  BCSCTL1                       
 00000058  BCSCTL2                       
-000012e2  C$$EXIT                       
+000012e8  C$$EXIT                       
 00000059  CACTL1                        
 0000005a  CACTL2                        
 0000005b  CAPD                          
@@ -350,11 +350,11 @@ address   name
 00000120  WDTCTL                        
 00000a00  __STACK_END                   
 00000050  __STACK_SIZE                  
-000012f4  __TI_CINIT_Base               
-000012f8  __TI_CINIT_Limit              
-000012f2  __TI_Handler_Table_Base       
-000012f4  __TI_Handler_Table_Limit      
-000012da  __TI_ISR_TRAP                 
+000012fa  __TI_CINIT_Base               
+000012fe  __TI_CINIT_Limit              
+000012f8  __TI_Handler_Table_Base       
+000012fa  __TI_Handler_Table_Limit      
+000012e0  __TI_ISR_TRAP                 
 000011fc  __TI_auto_init_nobinit_nopinit
 0000ffe0  __TI_int00                    
 0000ffe2  __TI_int01                    
@@ -374,24 +374,24 @@ address   name
 ffffffff  __TI_pprof_out_hndl           
 ffffffff  __TI_prof_data_size           
 ffffffff  __TI_prof_data_start          
-000012b6  __TI_zero_init_nomemset       
+000012bc  __TI_zero_init_nomemset       
 ffffffff  __c_args__                    
-000012d6  __mspabi_func_epilog_1        
-000012d4  __mspabi_func_epilog_2        
-000012d2  __mspabi_func_epilog_3        
-000012d0  __mspabi_func_epilog_4        
-000012ce  __mspabi_func_epilog_5        
-000012cc  __mspabi_func_epilog_6        
-000012ca  __mspabi_func_epilog_7        
+000012dc  __mspabi_func_epilog_1        
+000012da  __mspabi_func_epilog_2        
+000012d8  __mspabi_func_epilog_3        
+000012d6  __mspabi_func_epilog_4        
+000012d4  __mspabi_func_epilog_5        
+000012d2  __mspabi_func_epilog_6        
+000012d0  __mspabi_func_epilog_7        
 0000126c  _c_int00_noargs               
 0000fffe  _reset_vector                 
 000009b0  _stack                        
-000012ec  _system_post_cinit            
-000012e8  _system_pre_init              
-000012e2  abort                         
-000012a0  main                          
+000012f2  _system_post_cinit            
+000012ee  _system_pre_init              
+000012e8  abort                         
+00001288  main                          
 00001100  port1_hongwai                 
-00001288  port1_init                    
+000012a4  port1_init                    
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -572,25 +572,25 @@ address   name
 000011fc  __TI_auto_init_nobinit_nopinit
 0000123e  Clock_Init                    
 0000126c  _c_int00_noargs               
-00001288  port1_init                    
-000012a0  main                          
-000012b6  __TI_zero_init_nomemset       
-000012ca  __mspabi_func_epilog_7        
-000012cc  __mspabi_func_epilog_6        
-000012ce  __mspabi_func_epilog_5        
-000012d0  __mspabi_func_epilog_4        
-000012d2  __mspabi_func_epilog_3        
-000012d4  __mspabi_func_epilog_2        
-000012d6  __mspabi_func_epilog_1        
-000012da  __TI_ISR_TRAP                 
-000012e2  C$$EXIT                       
-000012e2  abort                         
-000012e8  _system_pre_init              
-000012ec  _system_post_cinit            
-000012f2  __TI_Handler_Table_Base       
-000012f4  __TI_CINIT_Base               
-000012f4  __TI_Handler_Table_Limit      
-000012f8  __TI_CINIT_Limit              
+00001288  main                          
+000012a4  port1_init                    
+000012bc  __TI_zero_init_nomemset       
+000012d0  __mspabi_func_epilog_7        
+000012d2  __mspabi_func_epilog_6        
+000012d4  __mspabi_func_epilog_5        
+000012d6  __mspabi_func_epilog_4        
+000012d8  __mspabi_func_epilog_3        
+000012da  __mspabi_func_epilog_2        
+000012dc  __mspabi_func_epilog_1        
+000012e0  __TI_ISR_TRAP                 
+000012e8  C$$EXIT                       
+000012e8  abort                         
+000012ee  _system_pre_init              
+000012f2  _system_post_cinit            
+000012f8  __TI_Handler_Table_Base       
+000012fa  __TI_CINIT_Base               
+000012fa  __TI_Handler_Table_Limit      
+000012fe  __TI_CINIT_Limit              
 0000ffe0  __TI_int00                    
 0000ffe2  __TI_int01                    
 0000ffe4  __TI_int02                    

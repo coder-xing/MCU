@@ -18,29 +18,28 @@ void port_init(){
     U0CTL |=I2C +SYNC; //选择I2c模式
     U0CTL &=~I2CEN;//复位
     I2CTCTL =I2CSSEL1; //SMCLk时钟
-    I2CSA =0xd0;       //从机地址
+    I2CSA =0xd0>>1;        //从机地址
     U0CTL |=I2CEN;      //i2c使能
-    I2CIE = RXRDYIE;
+ //   I2CIE = RXRDYIE;
     P6DIR =0xff;
     P6OUT =0x00;
-    P3DIR |=BIT1+BIT3;
+    P3DIR &=~0x0a;
 }
 /*
  * main.c
  */
 void main(void)
-
-{   uchar xx,yy;
+{ //  uchar xx,yy;
 	WDTCTL = WDTPW | WDTHOLD;	  // stop watchdog timer
 	port_init();
 	Clock_Init();
 	while(1){
-	yy=hex_bcd(10);
+//	yy=hex_bcd(10);
 	i2c_write(0x02,0x06);
-	xx=i2c_read(0x03);
-	P6OUT=i2c_read(0x03);
-	uchar light=bcd_hex(xx);
+//	xx=i2c_read(0x03);
+	P6OUT=i2c_read(0x00);
+//	uchar light=bcd_hex(xx);
 	//P6OUT=light;
-	delay_ms(8000);
+//	delay_ms(8000);
 	}
 }

@@ -39,9 +39,13 @@ void main(void)
 	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
 	Clock_Init();
 	while(1){
-//	    P6OUT=~IRvalue[2];
-//	    delay_ms(1000);
-	    P6OUT=IRvalue[2];
+	    P6OUT=~IRvalue[2];
+	    switch(IRvalue[2]){
+	    case 0x01:  break;
+	    case 0x02:
+	    }
+	    //	    delay_ms(1000);
+//	    P6OUT=IRvalue[2];
 //	    delay_ms(1000);
 	}
 }
@@ -84,7 +88,6 @@ __interrupt void port1_hongwai(void){
                         err--;
                         if(Time>30){
                             return;
-
                         }
                     }
                     IRvalue[k]>>=1;
@@ -101,7 +104,6 @@ __interrupt void port1_hongwai(void){
         {
             return;
         }
-
     }
     P1IFG=0x00;
 }

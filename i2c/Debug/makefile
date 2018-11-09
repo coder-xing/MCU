@@ -127,10 +127,10 @@ EXE_OUTPUTS__QUOTED += \
 "i2c.out" \
 
 BIN_OUTPUTS += \
-i2c.hex \
+i2c.txt \
 
 BIN_OUTPUTS__QUOTED += \
-"i2c.hex" \
+"i2c.txt" \
 
 
 # All Target
@@ -145,10 +145,10 @@ i2c.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
-i2c.hex: $(EXE_OUTPUTS)
+i2c.txt: $(EXE_OUTPUTS)
 	@echo 'Building files: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo 'Invoking: MSP430 Hex Utility'
-	"C:/ti/ccsv8/tools/compiler/ti-cgt-msp430_18.1.2.LTS/bin/hex430" --memwidth=8 --romwidth=8 -o "i2c.hex" $(EXE_OUTPUTS__QUOTED)
+	"C:/ti/ccsv8/tools/compiler/ti-cgt-msp430_18.1.2.LTS/bin/hex430" --memwidth=8 --romwidth=8 --ti_txt -o "i2c.txt" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo ' '
 	@$(MAKE) --no-print-directory post-build

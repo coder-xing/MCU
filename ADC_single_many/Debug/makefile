@@ -127,15 +127,15 @@ EXE_OUTPUTS__QUOTED += \
 "ADC_single_many.out" \
 
 BIN_OUTPUTS += \
-ADC_single_many.hex \
+ADC_single_many.txt \
 
 BIN_OUTPUTS__QUOTED += \
-"ADC_single_many.hex" \
+"ADC_single_many.txt" \
 
 
 # All Target
 all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
-	@$(MAKE) --no-print-directory -Onone "ADC_single_many.out"
+	@$(MAKE) --no-print-directory -Onone "ADC_single_many.out" secondary-outputs
 
 # Tool invocations
 ADC_single_many.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
@@ -145,10 +145,10 @@ ADC_single_many.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
-ADC_single_many.hex: $(EXE_OUTPUTS)
+ADC_single_many.txt: $(EXE_OUTPUTS)
 	@echo 'Building files: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo 'Invoking: MSP430 Hex Utility'
-	"C:/ti/ccsv8/tools/compiler/ti-cgt-msp430_18.1.2.LTS/bin/hex430" --memwidth=8 --romwidth=8 -o "ADC_single_many.hex" $(EXE_OUTPUTS__QUOTED)
+	"C:/ti/ccsv8/tools/compiler/ti-cgt-msp430_18.1.2.LTS/bin/hex430" --memwidth=8 --romwidth=8 --ti_txt -o "ADC_single_many.txt" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo ' '
 
@@ -159,6 +159,8 @@ clean:
 	-$(RM) "LCD1602.d" "main.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
+
+secondary-outputs: $(BIN_OUTPUTS)
 
 .PHONY: all clean dependents
 .SECONDARY:

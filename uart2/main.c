@@ -62,7 +62,7 @@ __interrupt void UART0_RX_ISR(void)
 //            处理来自串口 0 的发送中断，预留
 //*************************************************************************
 
-#pragma vector=UART0TX_VECTOR
+#pragma vector=USART0TX_VECTOR
 __interrupt void UART0_TX_ISR(void)
 {
 

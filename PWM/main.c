@@ -1,3 +1,10 @@
+/*程序功能
+ * 实现TA一路PWM输出
+ * 输出口为P1.2口
+ *
+ *
+ *
+ * */
 #include <msp430f169.h>
 #define  uchar unsigned char
 #define uint unsigned int
