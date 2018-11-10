@@ -59,19 +59,22 @@ void port_init(){
     P6OUT =0x00;
     P3DIR &=~0x0a;
 }
-/*
- * main.c
- */
+
 void main(void)
 {
     WDTCTL = WDTPW | WDTHOLD;     // stop watchdog timer
-    port_init();
     Clock_Init();
-    delay_ms(200);
+    port_init();
+
+ //   delay_ms(200);
     MPU6050_init();
-    delay_ms(200);
+ //   delay_ms(200);
     while(1){
   //  i2c_write(0x43,0x06);
-        P6OUT=i2c_read(0x67);
+        P6OUT=i2c_read(0x3B);
     }
 }
+
+
+
+
