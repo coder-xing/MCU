@@ -1,10 +1,10 @@
 ******************************************************************************
                   MSP430 Linker PC v18.1.2                     
 ******************************************************************************
->> Linked Fri Nov  9 13:03:46 2018
+>> Linked Thu Nov 15 10:49:49 2018
 
 OUTPUT FILE NAME:   <i2c.out>
-ENTRY POINT SYMBOL: "_c_int00_noinit_noargs"  address: 0000121a
+ENTRY POINT SYMBOL: "_c_int00_noinit_noargs"  address: 0000126e
 
 
 MEMORY CONFIGURATION
@@ -17,7 +17,7 @@ MEMORY CONFIGURATION
   RAM                   00000200   00000800  00000050  000007b0  RWIX
   INFOB                 00001000   00000080  00000000  00000080  RWIX
   INFOA                 00001080   00000080  00000000  00000080  RWIX
-  FLASH                 00001100   0000eee0  00000140  0000eda0  RWIX
+  FLASH                 00001100   0000eee0  000001a4  0000ed3c  RWIX
   INT00                 0000ffe0   00000002  00000002  00000000  RWIX
   INT01                 0000ffe2   00000002  00000002  00000000  RWIX
   INT02                 0000ffe4   00000002  00000002  00000000  RWIX
@@ -45,16 +45,19 @@ section   page    origin      length       input sections
                   000009b0    00000002     rts430_eabi.lib : boot.c.obj (.stack)
                   000009b2    0000004e     --HOLE--
 
-.text      0    00001100    00000140     
-                  00001100    0000005c     i2c.obj (.text:i2c_read)
-                  0000115c    0000003c     i2c.obj (.text:i2c_write)
-                  00001198    00000030     main.obj (.text:port_init)
-                  000011c8    0000002e     main.obj (.text:Clock_Init)
-                  000011f6    00000024     main.obj (.text:main)
-                  0000121a    00000014     rts430_eabi.lib : boot.c.obj (.text:_c_int00_noinit_noargs)
-                  0000122e    00000008                     : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
-                  00001236    00000006                     : exit.c.obj (.text:abort)
-                  0000123c    00000004                     : pre_init.c.obj (.text:_system_pre_init)
+.text      0    00001100    000001a4     
+                  00001100    0000004c     main.obj (.text:LED_on)
+                  0000114c    0000004c     main.obj (.text:oled_clear)
+                  00001198    0000003c     i2c.obj (.text:i2c_write)
+                  000011d4    00000030     main.obj (.text:port_init)
+                  00001204    0000002e     main.obj (.text:Clock_Init)
+                  00001232    00000020     main.obj (.text:oled_init)
+                  00001252    0000001c     main.obj (.text:main)
+                  0000126e    00000014     rts430_eabi.lib : boot.c.obj (.text:_c_int00_noinit_noargs)
+                  00001282    00000010                     : epilog.asm.obj (.text)
+                  00001292    00000008                     : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
+                  0000129a    00000006                     : exit.c.obj (.text:abort)
+                  000012a0    00000004                     : pre_init.c.obj (.text:_system_pre_init)
 
 .cinit     0    00001100    00000000     UNINITIALIZED
 
@@ -117,13 +120,14 @@ MODULE SUMMARY
        Module             code   ro data   rw data
        ------             ----   -------   -------
     .\
-       i2c.obj            152    0         0      
-       main.obj           130    0         0      
+       main.obj           306    0         0      
+       i2c.obj            60     0         0      
     +--+------------------+------+---------+---------+
-       Total:             282    0         0      
+       Total:             366    0         0      
                                                   
     C:\ti\ccsv8\tools\compiler\ti-cgt-msp430_18.1.2.LTS\lib\rts430_eabi.lib
        boot.c.obj         20     2         0      
+       epilog.asm.obj     16     0         0      
        isr_trap.asm.obj   8      0         0      
        exit.c.obj         6      0         0      
        pre_init.c.obj     4      0         0      
@@ -143,11 +147,11 @@ MODULE SUMMARY
        int13.asm.obj      0      2         0      
        int14.asm.obj      0      2         0      
     +--+------------------+------+---------+---------+
-       Total:             38     32        0      
+       Total:             54     32        0      
                                                   
        Stack:             0      0         80     
     +--+------------------+------+---------+---------+
-       Grand Total:       320    32        80     
+       Grand Total:       420    32        80     
 
 
 GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
@@ -193,11 +197,11 @@ address   name
 00000152  ADC12MEM9             
 00000057  BCSCTL1               
 00000058  BCSCTL2               
-00001236  C$$EXIT               
+0000129a  C$$EXIT               
 00000059  CACTL1                
 0000005a  CACTL2                
 0000005b  CAPD                  
-000011c8  Clock_Init            
+00001204  Clock_Init            
 000001c0  DAC12_0CTL            
 000001c8  DAC12_0DAT            
 000001c2  DAC12_1CTL            
@@ -237,6 +241,7 @@ address   name
 00000001  IE2                   
 00000002  IFG1                  
 00000003  IFG2                  
+00001100  LED_on                
 00000134  MAC                   
 00000136  MACS                  
 00000004  ME1                   
@@ -323,7 +328,7 @@ address   name
 00000120  WDTCTL                
 00000a00  __STACK_END           
 00000050  __STACK_SIZE          
-0000122e  __TI_ISR_TRAP         
+00001292  __TI_ISR_TRAP         
 0000ffe0  __TI_int00            
 0000ffe2  __TI_int01            
 0000ffe4  __TI_int02            
@@ -343,15 +348,23 @@ ffffffff  __TI_pprof_out_hndl
 ffffffff  __TI_prof_data_size   
 ffffffff  __TI_prof_data_start  
 ffffffff  __c_args__            
-0000121a  _c_int00_noinit_noargs
+0000128e  __mspabi_func_epilog_1
+0000128c  __mspabi_func_epilog_2
+0000128a  __mspabi_func_epilog_3
+00001288  __mspabi_func_epilog_4
+00001286  __mspabi_func_epilog_5
+00001284  __mspabi_func_epilog_6
+00001282  __mspabi_func_epilog_7
+0000126e  _c_int00_noinit_noargs
 0000fffe  _reset_vector         
 000009b0  _stack                
-0000123c  _system_pre_init      
-00001236  abort                 
-00001100  i2c_read              
-0000115c  i2c_write             
-000011f6  main                  
-00001198  port_init             
+000012a0  _system_pre_init      
+0000129a  abort                 
+00001198  i2c_write             
+00001252  main                  
+0000114c  oled_clear            
+00001232  oled_init             
+000011d4  port_init             
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -526,16 +539,25 @@ address   name
 000001f6  DMA2SZ                
 000009b0  _stack                
 00000a00  __STACK_END           
-00001100  i2c_read              
-0000115c  i2c_write             
-00001198  port_init             
-000011c8  Clock_Init            
-000011f6  main                  
-0000121a  _c_int00_noinit_noargs
-0000122e  __TI_ISR_TRAP         
-00001236  C$$EXIT               
-00001236  abort                 
-0000123c  _system_pre_init      
+00001100  LED_on                
+0000114c  oled_clear            
+00001198  i2c_write             
+000011d4  port_init             
+00001204  Clock_Init            
+00001232  oled_init             
+00001252  main                  
+0000126e  _c_int00_noinit_noargs
+00001282  __mspabi_func_epilog_7
+00001284  __mspabi_func_epilog_6
+00001286  __mspabi_func_epilog_5
+00001288  __mspabi_func_epilog_4
+0000128a  __mspabi_func_epilog_3
+0000128c  __mspabi_func_epilog_2
+0000128e  __mspabi_func_epilog_1
+00001292  __TI_ISR_TRAP         
+0000129a  C$$EXIT               
+0000129a  abort                 
+000012a0  _system_pre_init      
 0000ffe0  __TI_int00            
 0000ffe2  __TI_int01            
 0000ffe4  __TI_int02            
@@ -557,4 +579,4 @@ ffffffff  __TI_prof_data_size
 ffffffff  __TI_prof_data_start  
 ffffffff  __c_args__            
 
-[198 symbols]
+[207 symbols]

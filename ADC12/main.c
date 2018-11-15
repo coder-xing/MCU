@@ -76,4 +76,3 @@ __interrupt void ADC12_ISR(void)
                compare<<=1;
            }
 }
-

@@ -13,12 +13,41 @@ void Clock_Init()
   while((IFG1&OFIFG)!=0);           //如果标志位1，则继续循环等待
   IFG1&=~OFIFG;
 }
+void oled_init()
+{
+    i2c_write(0x00,0x8d);
+    i2c_write(0x00,0x14);
+    i2c_write(0x00,0xaf);
+}
+void oled_clear()
+{   unsigned char a,b;
+    for(a=0;a<8;a++)
+    {
+    i2c_write(0x00,0xb0+a);
+    i2c_write(0x00,0x00);
+    i2c_write(0x00,0x10);
+    for(b=0;b<128;b++)
+    i2c_write(0x40,0x00);
+    }
+}
+
+void LED_on()
+{
+    unsigned char i,n;
+    for(i=0;i<8;i++)
+    {
+        i2c_write(0x00,0xb0+i);
+        i2c_write(0x00,0x00);
+        i2c_write(0x00,0x10);
+        for(n=0;n<128;n++)i2c_write(0x40,1);
+    }
+}
 void port_init(){
     P3SEL |= 0x0A;
     U0CTL |=I2C +SYNC; //选择I2c模式
     U0CTL &=~I2CEN;//复位
     I2CTCTL =I2CSSEL1; //SMCLk时钟
-    I2CSA =0xd0>>1;        //从机地址
+    I2CSA =0x78>>1;        //从机地址
     U0CTL |=I2CEN;      //i2c使能
  //   I2CIE = RXRDYIE;
     P6DIR =0xff;
@@ -33,13 +62,10 @@ void main(void)
 	WDTCTL = WDTPW | WDTHOLD;	  // stop watchdog timer
 	port_init();
 	Clock_Init();
+	oled_init();
+	LED_on();
+	oled_clear();
 	while(1){
-//	yy=hex_bcd(10);
-	i2c_write(0x02,0x06);
-//	xx=i2c_read(0x03);
-	P6OUT=i2c_read(0x00);
-//	uchar light=bcd_hex(xx);
-	//P6OUT=light;
-//	delay_ms(8000);
+
 	}
 }

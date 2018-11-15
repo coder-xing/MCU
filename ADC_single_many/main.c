@@ -1,8 +1,5 @@
 #include <msp430f169.h>
 #include "LCD1602.h"
-/**
- * main.c
- */
 unsigned int result[];
 int main(void)
 {

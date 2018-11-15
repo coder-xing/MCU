@@ -22,7 +22,7 @@ void pwm(uint period,uint percent){
 void Clock_Init()
 {
   uchar i;
-  BCSCTL1&=~XT2OFF;                 //打开XT2振荡器
+  BCSCTL1&=~XT2OFF;                  //打开XT2振荡器
   BCSCTL2|=SELM1+SELS;              //MCLK为8MHZ，SMCLK为8MHZ
   do{
     IFG1&=~OFIFG;                   //清楚振荡器错误标志
@@ -42,20 +42,20 @@ void port1_init(){
     P6OUT=0x23;
 
 }
-uchar a=100;
+uchar a=3.0;
+
 void main(void)
 {
 	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
 	Clock_Init();
 	port1_init();
-	P1DIR |=BIT6;
-	P1SEL|=BIT6;
-	P1DIR |=BIT6;
+//	P1DIR |=BIT6+BIT2;
+	P1SEL|=BIT6+BIT2;
+	P1DIR |=BIT6+BIT2;
 	 _EINT();
 	TACTL=TASSEL_2+MC_1+ID_3;//SMCLK时钟源  MC_1增计数模式 8分频
 	TACCTL1=OUTMOD_7;
-	while(1) pwm(20000,a);
-
+	while(1) pwm(20000,a);;
 }
 
 #pragma vector= PORT1_VECTOR
@@ -71,7 +71,7 @@ __interrupt void keys(void)
     }
     if((P1IN&BIT2)==0)
     {
-        P6OUT=~P6OUT;
+        P6OUT=0x02;
     }
     if((P1IN&BIT3)==0)
     {
