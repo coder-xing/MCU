@@ -13,6 +13,8 @@
 
 #include <msp430x14x.h>
 #include "Config.h"
+#include <stdio.h>
+#include <string.h>
 
 //*************************************************************************
 //               MSP430串口初始化
@@ -72,15 +74,19 @@ __interrupt void UART0_TX_ISR(void)
 //           主函数
 //*************************************************************************
 void main(void)
-{   P6DIR=0xff;
+{    uchar a;
+  /*  float pi=17.625,test;
+    char byte[4];
+    memcpy( byte,&pi,sizeof(float) );
+    memcpy(&test,byte,sizeof(float));*/
+    P6DIR=0xff;
     P6OUT=0xff;
-  WDT_Init();                         //看门狗设置
-  Clock_Init();                       //系统时钟设置
-  UART_Init();                        //串口设置初始化
-  _EINT();                            //开中断
-  while(1)                            //无限循环
-    {
- //     Send_Byte(0x23);
- //     delay_ms(10);
-    }
+    WDT_Init();                         //看门狗设置
+    Clock_Init();                       //系统时钟设置
+    UART_Init();                        //串口设置初始化
+    _EINT();                            //开中断                               //无限循环
+     while(1);
+         //Send_Byte(0x45);
+
 }
+

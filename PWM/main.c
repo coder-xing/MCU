@@ -49,7 +49,6 @@ void main(void)
 	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
 	Clock_Init();
 	port1_init();
-//	P1DIR |=BIT6+BIT2;
 	P1SEL|=BIT6+BIT2;
 	P1DIR |=BIT6+BIT2;
 	 _EINT();

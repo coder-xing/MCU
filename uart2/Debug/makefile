@@ -126,15 +126,15 @@ EXE_OUTPUTS__QUOTED += \
 "uart2.out" \
 
 BIN_OUTPUTS += \
-uart2.hex \
+uart2.txt \
 
 BIN_OUTPUTS__QUOTED += \
-"uart2.hex" \
+"uart2.txt" \
 
 
 # All Target
 all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
-	@$(MAKE) --no-print-directory -Onone "uart2.out"
+	@$(MAKE) --no-print-directory -Onone "uart2.out" secondary-outputs
 
 # Tool invocations
 uart2.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
@@ -144,10 +144,10 @@ uart2.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
-uart2.hex: $(EXE_OUTPUTS)
+uart2.txt: $(EXE_OUTPUTS)
 	@echo 'Building files: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo 'Invoking: MSP430 Hex Utility'
-	"C:/ti/ccsv8/tools/compiler/ti-cgt-msp430_18.1.2.LTS/bin/hex430" --memwidth=8 --romwidth=8 -o "uart2.hex" $(EXE_OUTPUTS__QUOTED)
+	"C:/ti/ccsv8/tools/compiler/ti-cgt-msp430_18.1.2.LTS/bin/hex430" --memwidth=8 --romwidth=8 --ti_txt -o "uart2.txt" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo ' '
 
@@ -158,6 +158,8 @@ clean:
 	-$(RM) "main.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
+
+secondary-outputs: $(BIN_OUTPUTS)
 
 .PHONY: all clean dependents
 .SECONDARY:
